@@ -7,6 +7,8 @@ class Xz < Formula
   mirror "http://tukaani.org/xz/xz-5.2.3.tar.gz"
   sha256 "71928b357d0a09a12a4b4c5fafca8c31c19b0e7d3b8ebb19622e96f26dbf28cb"
 
+  keg_only "avoiding conflict with Homebrew/core."
+
   option :universal
 
   def install
