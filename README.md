@@ -13,8 +13,3 @@ brew install sashkab/universal/FORMULAE --universal
 
 
 [1]: https://github.com/Homebrew/homebrew-core/pull/9641#issuecomment-280746019
-
-
-## Work in progress
-
-Currently copied formulae conflicts with one in the homebrew-core.
