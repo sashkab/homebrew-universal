@@ -1,10 +1,11 @@
-class Readline < Formula
+class Ureadline < Formula
   desc "Library for command-line editing"
   homepage "https://tiswww.case.edu/php/chet/readline/rltop.html"
   url "https://ftpmirror.gnu.org/readline/readline-7.0.tar.gz"
   mirror "https://ftp.gnu.org/gnu/readline/readline-7.0.tar.gz"
   version "7.0.3"
   sha256 "750d437185286f40a369e1e4f4764eda932b9459b5ec9a731628393dd3d32334"
+  revision 1
 
   %w[
     001 9ac1b3ac2ec7b1bf0709af047f2d7d2a34ccde353684e57c6b47ebca77d7a376

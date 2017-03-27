@@ -1,13 +1,14 @@
 # This formula tracks 1.0.2 branch of OpenSSL, not the 1.1.0 branch. Due to
 # significant breaking API changes in 1.1.0 other formulae will be migrated
 # across slowly, so core will ship `openssl` & `openssl@1.1` for foreseeable.
-class Openssl < Formula
+class Uopenssl < Formula
   desc "SSL/TLS cryptography library"
   homepage "https://openssl.org/"
   url "https://www.openssl.org/source/openssl-1.0.2k.tar.gz"
   mirror "https://dl.bintray.com/homebrew/mirror/openssl-1.0.2k.tar.gz"
   mirror "https://www.mirrorservice.org/sites/ftp.openssl.org/source/openssl-1.0.2k.tar.gz"
   sha256 "6b3977c61f2aedf0f96367dcfb5c6e578cf37e7b8d913b4ecb6643c3cb88d8c0"
+  revision 1
 
   keg_only :provided_by_osx,
     "Apple has deprecated use of OpenSSL in favor of its own TLS and crypto libraries"

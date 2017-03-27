@@ -1,11 +1,12 @@
 # Upstream project has requested we use a mirror as the main URL
 # https://github.com/Homebrew/homebrew/pull/21419
-class Xz < Formula
+class Uxz < Formula
   desc "General-purpose data compression with high compression ratio"
   homepage "http://tukaani.org/xz/"
   url "https://fossies.org/linux/misc/xz-5.2.3.tar.gz"
   mirror "http://tukaani.org/xz/xz-5.2.3.tar.gz"
   sha256 "71928b357d0a09a12a4b4c5fafca8c31c19b0e7d3b8ebb19622e96f26dbf28cb"
+  revision 1
 
   keg_only "avoiding conflict with Homebrew/core."
 

@@ -1,9 +1,10 @@
-class Sqlite < Formula
+class Usqlite < Formula
   desc "Command-line interface for SQLite"
   homepage "https://sqlite.org/"
   url "https://sqlite.org/2017/sqlite-autoconf-3170000.tar.gz"
   version "3.17.0"
   sha256 "a4e485ad3a16e054765baf6371826b5000beed07e626510896069c0bf013874c"
+  revision 1
 
   keg_only :provided_by_osx, "macOS provides an older sqlite3."
 
