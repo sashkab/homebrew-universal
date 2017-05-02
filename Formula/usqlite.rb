@@ -4,7 +4,6 @@ class Usqlite < Formula
   url "https://sqlite.org/2017/sqlite-autoconf-3180000.tar.gz"
   version "3.18.0"
   sha256 "3757612463976e7d08c5e9f0af3021613fc24bbcfe1c51197d6776b9ece9ac5c"
-  revision 1
 
   keg_only :provided_by_osx, "macOS provides an older sqlite3."
 
