@@ -1,9 +1,9 @@
 class Usqlite < Formula
   desc "Command-line interface for SQLite"
   homepage "https://sqlite.org/"
-  url "https://sqlite.org/2017/sqlite-autoconf-3180000.tar.gz"
-  version "3.18.0"
-  sha256 "3757612463976e7d08c5e9f0af3021613fc24bbcfe1c51197d6776b9ece9ac5c"
+  url "https://sqlite.org/2017/sqlite-autoconf-3190300.tar.gz"
+  version "3.19.3"
+  sha256 "06129c03dced9f87733a8cba408871bd60673b8f93b920ba8d815efab0a06301"
   revision 1
 
   keg_only :provided_by_osx, "macOS provides an older sqlite3"
@@ -31,9 +31,9 @@ class Usqlite < Formula
   end
 
   resource "docs" do
-    url "https://www.sqlite.org/2017/sqlite-doc-3180000.zip"
-    version "3.18.0"
-    sha256 "6f763eba9f51cb1096d1d40fbdd7ff974203060ddb892fc735adb2d7d42f1dad"
+    url "https://www.sqlite.org/2017/sqlite-doc-3190300.zip"
+    version "3.19.3"
+    sha256 "62cda70d5285e35144ddfd4629df8fadc2bae8dbcb43d0638aa874c1c03de101"
   end
 
   def install
