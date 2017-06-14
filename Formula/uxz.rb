@@ -8,7 +8,7 @@ class Uxz < Formula
   sha256 "71928b357d0a09a12a4b4c5fafca8c31c19b0e7d3b8ebb19622e96f26dbf28cb"
   revision 1
 
-  keg_only "avoiding conflict with Homebrew/core."
+  keg_only "avoiding conflict with Homebrew/core"
 
   option :universal
 
