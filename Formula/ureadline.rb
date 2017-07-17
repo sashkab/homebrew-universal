@@ -5,7 +5,7 @@ class Ureadline < Formula
   mirror "https://ftpmirror.gnu.org/readline/readline-7.0.tar.gz"
   version "7.0.3"
   sha256 "750d437185286f40a369e1e4f4764eda932b9459b5ec9a731628393dd3d32334"
-  revision 1
+  revision 2
 
   %w[
     001 9ac1b3ac2ec7b1bf0709af047f2d7d2a34ccde353684e57c6b47ebca77d7a376
@@ -43,7 +43,7 @@ class Ureadline < Formula
         return 0;
       }
     EOS
-    system ENV.cc, "-L", lib, "test.c", "-lreadline", "-o", "test"
+    system ENV.cc, "-L", lib, "test.c", "-L#{lib}", "-lreadline", "-o", "test"
     assert_equal "test> Hello, World!\nHello, World!",
       pipe_output("./test", "Hello, World!\n").strip
   end
