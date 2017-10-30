@@ -1,10 +1,9 @@
 class Usqlite < Formula
   desc "Command-line interface for SQLite"
   homepage "https://sqlite.org/"
-  url "https://sqlite.org/2017/sqlite-autoconf-3200100.tar.gz"
-  version "3.20.1"
-  sha256 "ec66595b29bc0798b023a5122021ea646ab4fa9e2f735937c5426feeba950742"
-
+  url "https://sqlite.org/2017/sqlite-autoconf-3210000.tar.gz"
+  version "3.21.0"
+  sha256 "d7dd516775005ad87a57f428b6f86afd206cb341722927f104d3f0cf65fbbbe3"
   keg_only :provided_by_osx, "macOS provides an older sqlite3"
 
   option :universal
@@ -30,10 +29,9 @@ class Usqlite < Formula
   end
 
   resource "docs" do
-    url "https://www.sqlite.org/2017/sqlite-doc-3200100.zip"
-    version "3.20.1"
-    sha256 "0caf410e604411fd925c699d5fcb1d846f9297cdf2e18251eceb3e5708301e85"
-  end
+    url "https://www.sqlite.org/2017/sqlite-doc-3210000.zip"
+    version "3.21.0"
+    sha256 "78c2fc9b144b168c7df53ff192c84fa7c29bcc44324b48b0f809a13810bc6c36"  end
 
   def install
     ENV.append "CPPFLAGS", "-DSQLITE_ENABLE_COLUMN_METADATA=1"
