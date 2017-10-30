@@ -4,7 +4,7 @@ class Usqlite < Formula
   url "https://sqlite.org/2017/sqlite-autoconf-3200100.tar.gz"
   version "3.20.1"
   sha256 "ec66595b29bc0798b023a5122021ea646ab4fa9e2f735937c5426feeba950742"
-  
+
   keg_only :provided_by_osx, "macOS provides an older sqlite3"
 
   option :universal
@@ -85,7 +85,7 @@ class Usqlite < Formula
   def caveats
     s = ""
     if build.with? "functions"
-      s += <<-EOS.undent
+      s += <<~EOS
         Usage instructions for applications calling the sqlite3 API functions:
 
           In your application, call sqlite3_enable_load_extension(db,1) to
@@ -108,7 +108,7 @@ class Usqlite < Formula
       user_history = "~/.sqlite_history"
       user_history_path = File.expand_path(user_history)
       if File.exist?(user_history_path) && File.read(user_history_path).include?("\\040")
-        s += <<-EOS.undent
+        s += <<~EOS
           Homebrew has detected an existing SQLite history file that was created
           with the editline library. The current version of this formula is
           built with Readline. To back up and convert your history file so that
@@ -126,7 +126,7 @@ class Usqlite < Formula
 
   test do
     path = testpath/"school.sql"
-    path.write <<-EOS.undent
+    path.write <<~EOS
       create table students (name text, age integer);
       insert into students (name, age) values ('Bob', 14);
       insert into students (name, age) values ('Sue', 12);
