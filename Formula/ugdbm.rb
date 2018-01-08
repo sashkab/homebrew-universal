@@ -1,10 +1,9 @@
 class Ugdbm < Formula
   desc "GNU database manager"
   homepage "https://www.gnu.org/software/gdbm/"
-  url "https://ftp.gnu.org/gnu/gdbm/gdbm-1.13.tar.gz"
-  mirror "https://ftpmirror.gnu.org/gdbm/gdbm-1.13.tar.gz"
-  sha256 "9d252cbd7d793f7b12bcceaddda98d257c14f4d1890d851c386c37207000a253"
-  revision 1
+  url "https://ftp.gnu.org/gnu/gdbm/gdbm-1.14.1.tar.gz"
+  mirror "https://ftpmirror.gnu.org/gdbm/gdbm-1.14.1.tar.gz"
+  sha256 "cdceff00ffe014495bed3aed71c7910aa88bf29379f795abc0f46d4ee5f8bc5f"
 
   keg_only "avoiding conflict with Homebrew/core"
   option :universal
