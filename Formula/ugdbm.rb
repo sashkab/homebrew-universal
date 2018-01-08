@@ -25,6 +25,9 @@ class Ugdbm < Formula
 
     system "./configure", *args
     system "make", "install"
+
+    # Avoid breaking zsh login shells unnecessarily
+    ln_s "libgdbm.5.dylib", lib/"libgdbm.4.dylib"
   end
 
   test do
