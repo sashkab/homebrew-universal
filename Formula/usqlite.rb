@@ -32,6 +32,7 @@ class Usqlite < Formula
     url "https://sqlite.org/2018/sqlite-doc-3220000.zip"
     version "3.22.0"
     sha256 "34763f0c90e94e5b5fd78d699209d28ef4b409279a9ce796c16b2b653a761343"
+  end
 
   def install
     ENV.append "CPPFLAGS", "-DSQLITE_ENABLE_COLUMN_METADATA=1"
