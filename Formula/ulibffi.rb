@@ -13,7 +13,7 @@ class Ulibffi < Formula
     depends_on "libtool" => :build
   end
 
-  keg_only :provided_by_osx, "some formulae require a newer version of libffi"
+  keg_only :provided_by_macos, "some formulae require a newer version of libffi"
 
   stable do
     patch :DATA

@@ -10,7 +10,7 @@ class Uopenssl < Formula
   mirror "http://artfiles.org/openssl.org/source/openssl-1.0.2n.tar.gz"
   sha256 "370babb75f278c39e0c50e8c4e7493bc0f18db6867478341a832a982fd15a8fe"
 
-  keg_only :provided_by_osx,
+  keg_only :provided_by_macos,
     "Apple has deprecated use of OpenSSL in favor of its own TLS and crypto libraries"
 
   option :universal
