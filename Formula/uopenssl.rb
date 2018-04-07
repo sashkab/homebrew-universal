@@ -4,12 +4,11 @@
 class Uopenssl < Formula
   desc "SSL/TLS cryptography library"
   homepage "https://openssl.org/"
-  url "https://www.openssl.org/source/openssl-1.0.2n.tar.gz"
-  mirror "https://dl.bintray.com/homebrew/mirror/openssl-1.0.2n.tar.gz"
-  mirror "https://www.mirrorservice.org/sites/ftp.openssl.org/source/openssl-1.0.2n.tar.gz"
-  mirror "http://artfiles.org/openssl.org/source/openssl-1.0.2n.tar.gz"
-  sha256 "370babb75f278c39e0c50e8c4e7493bc0f18db6867478341a832a982fd15a8fe"
-
+  url "https://www.openssl.org/source/openssl-1.0.2o.tar.gz"
+  mirror "https://dl.bintray.com/homebrew/mirror/openssl-1.0.2o.tar.gz"
+  mirror "https://www.mirrorservice.org/sites/ftp.openssl.org/source/openssl-1.0.2o.tar.gz"
+  mirror "http://artfiles.org/openssl.org/source/openssl-1.0.2o.tar.gz"
+  sha256 "ec3f5c9714ba0fd45cb4e087301eb1336c317e0d20b575a125050470e8089e4d"
   keg_only :provided_by_macos,
     "Apple has deprecated use of OpenSSL in favor of its own TLS and crypto libraries"
 
@@ -30,8 +29,10 @@ class Uopenssl < Formula
   def configure_args; %W[
     --prefix=#{prefix}
     --openssldir=#{openssldir}
+    no-comp
     no-ssl2
-    zlib-dynamic
+    no-ssl3
+    no-zlib
     shared
     enable-cms
   ]
@@ -43,14 +44,6 @@ class Uopenssl < Formula
     # along with perl modules in PERL5LIB.
     ENV.delete("PERL")
     ENV.delete("PERL5LIB")
-
-    # Load zlib from an explicit path instead of relying on dyld's fallback
-    # path, which is empty in a SIP context. This patch will be unnecessary
-    # when we begin building openssl with no-comp to disable TLS compression.
-    # https://langui.sh/2015/11/27/sip-and-dlopen
-    inreplace "crypto/comp/c_zlib.c",
-              'zlib_dso = DSO_load(NULL, "z", NULL, 0);',
-              'zlib_dso = DSO_load(NULL, "/usr/lib/libz.dylib", NULL, DSO_FLAG_NO_NAME_TRANSLATION);'
 
     if build.universal?
       ENV.permit_arch_flags
