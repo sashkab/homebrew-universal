@@ -29,8 +29,10 @@ class Uopenssl < Formula
   def configure_args; %W[
     --prefix=#{prefix}
     --openssldir=#{openssldir}
+    no-comp
     no-ssl2
-    zlib-dynamic
+    no-ssl3
+    no-zlib
     shared
     enable-cms
   ]
@@ -42,14 +44,6 @@ class Uopenssl < Formula
     # along with perl modules in PERL5LIB.
     ENV.delete("PERL")
     ENV.delete("PERL5LIB")
-
-    # Load zlib from an explicit path instead of relying on dyld's fallback
-    # path, which is empty in a SIP context. This patch will be unnecessary
-    # when we begin building openssl with no-comp to disable TLS compression.
-    # https://langui.sh/2015/11/27/sip-and-dlopen
-    inreplace "crypto/comp/c_zlib.c",
-              'zlib_dso = DSO_load(NULL, "z", NULL, 0);',
-              'zlib_dso = DSO_load(NULL, "/usr/lib/libz.dylib", NULL, DSO_FLAG_NO_NAME_TRANSLATION);'
 
     if build.universal?
       ENV.permit_arch_flags
