@@ -81,24 +81,33 @@ class Uopenssl < Formula
 
     if build.universal?
       %w[libcrypto libssl].each do |libname|
-        system "lipo", "-create", "#{dirs.first}/#{libname}.1.0.0.dylib",
-                                  "#{dirs.last}/#{libname}.1.0.0.dylib",
-                       "-output", "#{lib}/#{libname}.1.0.0.dylib"
-        system "lipo", "-create", "#{dirs.first}/#{libname}.a",
-                                  "#{dirs.last}/#{libname}.a",
-                       "-output", "#{lib}/#{libname}.a"
+        $stdout.print "dirs=",dirs,"\n"
+        $stdout.print "libname=",libname,"\n"
+        $stdout.print "Removing ","#{lib}/#{libname}.1.0.0.dylib","\n"
+        rm_f "#{lib}/#{libname}.1.0.0.dylib"
+        $stdout.print "macho\n"
+        MachO::Tools.merge_machos("#{lib}/#{libname}.1.0.0.dylib",
+                                  "#{dirs.first}/#{libname}.1.0.0.dylib",
+                                  "#{dirs.last}/#{libname}.1.0.0.dylib")
+        $stdout.print "Removing ","#{lib}/#{libname}.a","\n"
+        rm_f "#{lib}/#{libname}.a","\n"
+        $stdout.print "macho\n"
+        MachO::Tools.merge_machos("#{lib}/#{libname}.a",
+                                  "#{dirs.first}/#{libname}.a",
+                                  "#{dirs.last}/#{libname}.a")
       end
 
       Dir.glob("#{dirs.first}/engines/*.dylib") do |engine|
         libname = File.basename(engine)
-        system "lipo", "-create", "#{dirs.first}/engines/#{libname}",
-                                  "#{dirs.last}/engines/#{libname}",
-                       "-output", "#{lib}/engines/#{libname}"
+        rm_f "#{lib}/engines/#{libname}"
+        MachO::Tools.merge_machos("#{lib}/engines/#{libname}",
+                                  "#{dirs.first}/engines/#{libname}",
+                                  "#{dirs.last}/engines/#{libname}")
       end
 
-      system "lipo", "-create", "#{dirs.first}/openssl",
-                                "#{dirs.last}/openssl",
-                     "-output", "#{bin}/openssl"
+      MachO::Tools.merge_machos("#{bin}/openssl",
+                                "#{dirs.first}/openssl",
+                                "#{dirs.last}/openssl")
 
       confs = archs.map do |arch|
         <<~EOS
