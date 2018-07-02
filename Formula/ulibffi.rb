@@ -1,10 +1,14 @@
 class Ulibffi < Formula
   desc "Portable Foreign Function Interface library"
   homepage "https://sourceware.org/libffi/"
-  url "https://sourceware.org/pub/libffi/libffi-3.2.1.tar.gz"
-  mirror "https://mirrors.ocf.berkeley.edu/debian/pool/main/libf/libffi/libffi_3.2.1.orig.tar.gz"
-  mirror "https://mirrorservice.org/sites/ftp.debian.org/debian/pool/main/libf/libffi/libffi_3.2.1.orig.tar.gz"
-  sha256 "d06ebb8e1d9a22d19e38d63fdb83954253f39bedc5d46232a05645685722ca37"
+
+  stable do
+    url "https://sourceware.org/pub/libffi/libffi-3.2.1.tar.gz"
+    mirror "https://mirrors.ocf.berkeley.edu/debian/pool/main/libf/libffi/libffi_3.2.1.orig.tar.gz"
+    mirror "https://mirrorservice.org/sites/ftp.debian.org/debian/pool/main/libf/libffi/libffi_3.2.1.orig.tar.gz"
+    sha256 "d06ebb8e1d9a22d19e38d63fdb83954253f39bedc5d46232a05645685722ca37"
+    patch :DATA
+  end
 
   head do
     url "https://github.com/libffi/libffi.git"
@@ -15,10 +19,6 @@ class Ulibffi < Formula
 
   keg_only :provided_by_macos, "some formulae require a newer version of libffi"
 
-  stable do
-    patch :DATA
-  end
-
   def install
     ENV.deparallelize # https://github.com/Homebrew/homebrew/pull/19267
     system "./autogen.sh" if build.head?
@@ -28,7 +28,7 @@ class Ulibffi < Formula
     system "make", "install"
     system "make", "-C", "build_macosx-x86_64"
     system "make", "-C", "build_macosx-i386"
-    system "mkdir", "universal"
+    mkdir "universal"
     system "lipo", "-create", "build_macosx-x86_64/.libs/libffi.6.dylib", "build_macosx-i386/.libs/libffi.6.dylib", "-output", "universal/libffi.6.dylib"
     system "lipo", "-create", "build_macosx-x86_64/.libs/libffi.a", "build_macosx-i386/.libs/libffi.a", "-output", "universal/libffi.a"
     lib.install Dir["universal/*"]

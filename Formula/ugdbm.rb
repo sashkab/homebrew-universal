@@ -25,7 +25,6 @@ class Ugdbm < Formula
 
     system "./configure", *args
     system "make", "install"
-
   end
 
   test do

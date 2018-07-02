@@ -105,7 +105,7 @@ class Uopenssl < Formula
           #ifdef __#{arch}__
           #{(buildpath/"build-#{arch}/opensslconf.h").read}
           #endif
-          EOS
+        EOS
       end
       (include/"openssl/opensslconf.h").atomic_write confs.join("\n")
     end
