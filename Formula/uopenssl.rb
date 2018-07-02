@@ -9,6 +9,7 @@ class Uopenssl < Formula
   mirror "https://www.mirrorservice.org/sites/ftp.openssl.org/source/openssl-1.0.2o.tar.gz"
   mirror "http://artfiles.org/openssl.org/source/openssl-1.0.2o.tar.gz"
   sha256 "ec3f5c9714ba0fd45cb4e087301eb1336c317e0d20b575a125050470e8089e4d"
+  revision 1
   keg_only :provided_by_macos,
     "Apple has deprecated use of OpenSSL in favor of its own TLS and crypto libraries"
 
@@ -29,7 +30,6 @@ class Uopenssl < Formula
   def configure_args; %W[
     --prefix=#{prefix}
     --openssldir=#{openssldir}
-    no-comp
     no-ssl2
     no-ssl3
     no-zlib
@@ -146,7 +146,7 @@ class Uopenssl < Formula
 
     and run
       #{opt_bin}/c_rehash
-    EOS
+  EOS
   end
 
   test do

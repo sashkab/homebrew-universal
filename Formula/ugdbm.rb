@@ -1,10 +1,10 @@
 class Ugdbm < Formula
   desc "GNU database manager"
   homepage "https://www.gnu.org/software/gdbm/"
-  url "https://ftp.gnu.org/gnu/gdbm/gdbm-1.14.1.tar.gz"
-  mirror "https://ftpmirror.gnu.org/gdbm/gdbm-1.14.1.tar.gz"
-  sha256 "cdceff00ffe014495bed3aed71c7910aa88bf29379f795abc0f46d4ee5f8bc5f"
-
+  url "https://ftp.gnu.org/gnu/gdbm/gdbm-1.16.tar.gz"
+  mirror "https://ftpmirror.gnu.org/gdbm/gdbm-1.16.tar.gz"
+  sha256 "c8a18bc6259da0c3eefefb018f8aa298fddc6f86c6fc0f0dec73270896ab512f"
+  revision 1
   keg_only "avoiding conflict with Homebrew/core"
   option :universal
   option "with-libgdbm-compat", "Build libgdbm_compat, a compatibility layer which provides UNIX-like dbm and ndbm interfaces."
@@ -26,8 +26,6 @@ class Ugdbm < Formula
     system "./configure", *args
     system "make", "install"
 
-    # Avoid breaking zsh login shells unnecessarily
-    ln_s "libgdbm.5.dylib", lib/"libgdbm.4.dylib"
   end
 
   test do
