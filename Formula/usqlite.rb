@@ -19,7 +19,7 @@ class Usqlite < Formula
   option "with-json1", "Enable the JSON1 extension"
   option "with-session", "Enable the session extension"
 
-  depends_on "readline" => :recommended
+  depends_on "ureadline" => :recommended
   depends_on "icu4c" => :optional
 
   resource "functions" do
@@ -64,7 +64,7 @@ class Usqlite < Formula
       "--disable-dependency-tracking",
       "--enable-dynamic-extensions",
     ]
-    args << "--enable-readline" << "--disable-editline" if build.with? "readline"
+    args << "--enable-readline" << "--disable-editline" if build.with? "ureadline"
 
     system "./configure", *args
     system "make", "install"
@@ -103,7 +103,7 @@ class Usqlite < Formula
            0.707106781186548
       EOS
     end
-    if build.with? "readline"
+    if build.with? "ureadline"
       user_history = "~/.sqlite_history"
       user_history_path = File.expand_path(user_history)
       if File.exist?(user_history_path) && File.read(user_history_path).include?("\\040")
