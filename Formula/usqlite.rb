@@ -4,7 +4,7 @@ class Usqlite < Formula
   url "https://sqlite.org/2018/sqlite-autoconf-3240000.tar.gz"
   version "3.24.0"
   sha256 "d9d14e88c6fb6d68de9ca0d1f9797477d82fc3aed613558f87ffbdbbc5ceb74a"
-  revision 1
+  revision 2
   keg_only :provided_by_macos, "macOS provides an older sqlite3"
 
   option :universal
@@ -20,7 +20,7 @@ class Usqlite < Formula
   option "with-json1", "Enable the JSON1 extension"
   option "with-session", "Enable the session extension"
 
-  depends_on "ureadline" => :recommended
+  depends_on "sashkab/universal/ureadline" => :recommended
   depends_on "icu4c" => :optional
 
   resource "functions" do
@@ -65,7 +65,7 @@ class Usqlite < Formula
       "--disable-dependency-tracking",
       "--enable-dynamic-extensions",
     ]
-    args << "--enable-readline" << "--disable-editline" if build.with? "ureadline"
+    args << "--enable-readline" << "--disable-editline" if build.with? "sashkab/universal/ureadline"
 
     system "./configure", *args
     system "make", "install"
@@ -104,7 +104,7 @@ class Usqlite < Formula
            0.707106781186548
       EOS
     end
-    if build.with? "ureadline"
+    if build.with? "sashkab/universal/ureadline"
       user_history = "~/.sqlite_history"
       user_history_path = File.expand_path(user_history)
       if File.exist?(user_history_path) && File.read(user_history_path).include?("\\040")
