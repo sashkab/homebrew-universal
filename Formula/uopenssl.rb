@@ -9,6 +9,7 @@ class Uopenssl < Formula
   mirror "https://www.mirrorservice.org/sites/ftp.openssl.org/source/openssl-1.0.2p.tar.gz"
   mirror "http://artfiles.org/openssl.org/source/openssl-1.0.2p.tar.gz"
   sha256 "50a98e07b1a89eb8f6a99477f262df71c6fa7bef77df4dc83025a2845c827d00"
+  revision 1
 
   keg_only :provided_by_macos,
     "Apple has deprecated use of OpenSSL in favor of its own TLS and crypto libraries"
@@ -81,24 +82,27 @@ class Uopenssl < Formula
 
     if build.universal?
       %w[libcrypto libssl].each do |libname|
-        system "lipo", "-create", "#{dirs.first}/#{libname}.1.0.0.dylib",
-                                  "#{dirs.last}/#{libname}.1.0.0.dylib",
-                       "-output", "#{lib}/#{libname}.1.0.0.dylib"
-        system "lipo", "-create", "#{dirs.first}/#{libname}.a",
-                                  "#{dirs.last}/#{libname}.a",
-                       "-output", "#{lib}/#{libname}.a"
+        rm_f "#{lib}/#{libname}.1.0.0.dylib"
+        MachO::Tools.merge_machos("#{lib}/#{libname}.1.0.0.dylib",
+                                  "#{dirs.first}/#{libname}.1.0.0.dylib",
+                                  "#{dirs.last}/#{libname}.1.0.0.dylib")
+        rm_f "#{lib}/#{libname}.a","\n"
+        MachO::Tools.merge_machos("#{lib}/#{libname}.a",
+                                  "#{dirs.first}/#{libname}.a",
+                                  "#{dirs.last}/#{libname}.a")
       end
 
       Dir.glob("#{dirs.first}/engines/*.dylib") do |engine|
         libname = File.basename(engine)
-        system "lipo", "-create", "#{dirs.first}/engines/#{libname}",
-                                  "#{dirs.last}/engines/#{libname}",
-                       "-output", "#{lib}/engines/#{libname}"
+        rm_f "#{lib}/engines/#{libname}"
+        MachO::Tools.merge_machos("#{lib}/engines/#{libname}",
+                                  "#{dirs.first}/engines/#{libname}",
+                                  "#{dirs.last}/engines/#{libname}")
       end
 
-      system "lipo", "-create", "#{dirs.first}/openssl",
-                                "#{dirs.last}/openssl",
-                     "-output", "#{bin}/openssl"
+      MachO::Tools.merge_machos("#{bin}/openssl",
+                                "#{dirs.first}/openssl",
+                                "#{dirs.last}/openssl")
 
       confs = archs.map do |arch|
         <<~EOS
