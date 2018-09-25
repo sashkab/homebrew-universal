@@ -9,6 +9,7 @@ class Uopenssl < Formula
   mirror "https://www.mirrorservice.org/sites/ftp.openssl.org/source/openssl-1.0.2p.tar.gz"
   mirror "http://artfiles.org/openssl.org/source/openssl-1.0.2p.tar.gz"
   sha256 "50a98e07b1a89eb8f6a99477f262df71c6fa7bef77df4dc83025a2845c827d00"
+  revision 1
 
   keg_only :provided_by_macos,
     "Apple has deprecated use of OpenSSL in favor of its own TLS and crypto libraries"
@@ -81,17 +82,11 @@ class Uopenssl < Formula
 
     if build.universal?
       %w[libcrypto libssl].each do |libname|
-        $stdout.print "dirs=",dirs,"\n"
-        $stdout.print "libname=",libname,"\n"
-        $stdout.print "Removing ","#{lib}/#{libname}.1.0.0.dylib","\n"
         rm_f "#{lib}/#{libname}.1.0.0.dylib"
-        $stdout.print "macho\n"
         MachO::Tools.merge_machos("#{lib}/#{libname}.1.0.0.dylib",
                                   "#{dirs.first}/#{libname}.1.0.0.dylib",
                                   "#{dirs.last}/#{libname}.1.0.0.dylib")
-        $stdout.print "Removing ","#{lib}/#{libname}.a","\n"
         rm_f "#{lib}/#{libname}.a","\n"
-        $stdout.print "macho\n"
         MachO::Tools.merge_machos("#{lib}/#{libname}.a",
                                   "#{dirs.first}/#{libname}.a",
                                   "#{dirs.last}/#{libname}.a")
