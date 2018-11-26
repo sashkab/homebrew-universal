@@ -1,3 +1,5 @@
+# DEPRECATED PROJECT
+
 # Homebrew-universal: Universal formulae for the Homebrew package manager 🍻
 
 Sometime in early 2017, [Homebrew core developers decided][1] that there is no longer a need to keep
