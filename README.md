@@ -1,17 +1,14 @@
-# DEPRECATED PROJECT
+# Deprecated
 
-# Homebrew-universal: Universal formulae for the Homebrew package manager 🍻
+It became impossible to build universal formulas on latest versions of macOS, therefor this tap is deprecated.
+[With the release of Homebrew 2.0 support for building universal binaries will be removed from Homebrew.][2]
 
-Sometime in early 2017, [Homebrew core developers decided][1] that there is no longer a need to keep
-universal formulae in the repository and removed them. Some of these formulae I need to maintain 
-universal versions of the Python interpreter on macOS, so I decided to create a tap I can use.
+On 2019.01.09 all formulas were removed.
 
+[2]: https://brew.sh/2019/01/09/homebrew-1.9.0/
 
-## How to use?
+To untap, please run:
 
-```bash
-brew install sashkab/universal/FORMULAE --universal
+```sh
+brew untap sashkab/universal
 ```
-
-
-[1]: https://github.com/Homebrew/homebrew-core/pull/9641#issuecomment-280746019
